@@ -25,6 +25,9 @@ $(document).ready(function() {
         var cds = music[i];
         console.log(cds);
         console.log(cds.genre);
+
+        var genre = $( ".genre option:selected" ).text();
+        console.log(genre);
       }
     },
     'error': function(request, state, error) {
