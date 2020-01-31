@@ -13,29 +13,38 @@ $(document).ready(function() {
   $.ajax({
     'url': url,
     'method': 'GET',
-    'success': function(response) {
-      // console.log(response);
-      // console.log(response.response);
-      printResponse(response.response);
+    'success': function(data, state) {
+      console.log(data);
+      console.log(state);
+      // console.log(data.response);
+      var music = data.response;
+      console.log(music);
+      printResponse(music);
+      for (var i = 0; i < music.length; i++) {
+        // console.log(music[i]);
+        var cds = music[i];
+        console.log(cds);
+        console.log(cds.genre);
+      }
     },
     'error': function(request, state, error) {
       alert('Errore' + error);
     }
-  })
+  });
 
 });
 
 function printResponse(album) {
   for (var i = 0; i < album.length; i++) {
     var cd = album[i];
-    console.log(cd);
+    // console.log(cd);
 
     var source = $("#entry-template").html();
-    console.log(source);
+    // console.log(source);
     var template = Handlebars.compile(source);
 
     var html = template(cd);
-    console.log(html);
+    // console.log(html);
     $('.cds-container').append(html);
   }
 }
