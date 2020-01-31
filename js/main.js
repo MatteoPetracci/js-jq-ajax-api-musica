@@ -9,8 +9,16 @@ $(document).ready(function() {
   // in una variabile salvo la chiamata
 	var url = 'https://flynn.boolean.careers/exercises/api/array/music';
   console.log(url);
+  // chiamata Ajax
   $.ajax({
     'url': url,
+    'method': 'GET',
+    'success': function(response) {
+      console.log(response);
+    },
+    'error': function(request, state, error) {
+      alert('Errore' + error);
+    }
   })
 
 });
