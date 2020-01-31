@@ -25,10 +25,12 @@ $(document).ready(function() {
 
 });
 
-
 function printResponse(album) {
   for (var i = 0; i < album.length; i++) {
     var cd = album[i];
     console.log(cd);
+    var source = $("#entry-template").html();
+    console.log(source);
+    var template = Handlebars.compile(source);
   }
 }
