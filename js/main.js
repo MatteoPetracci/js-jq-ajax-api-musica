@@ -20,32 +20,46 @@ $(document).ready(function() {
       var music = data.response;
       console.log(music);
       printResponse(music);
-      for (var i = 0; i < music.length; i++) {
-        // console.log(music[i]);
-        var cds = music[i];
-        console.log(cds);
-        console.log(cds.genre);
-
-        var genre = $( ".genre option:selected" ).text();
-        console.log(genre);
-      }
     },
     'error': function(request, state, error) {
       alert('Errore' + error);
     }
   });
+});
 
+$('select').change(function() {
+	var element = $(this).val();
+	var url = 'https://flynn.boolean.careers/exercises/api/array/music';
+	console.log(element);
+	$.ajax({
+		'url': url,
+		'method': 'GET',
+		'success': function(data) {
+			var music = data.response;
+			$(".cds-container").empty();
+			for (var i = 0; i < music.length; i++) {
+				// console.log(music[i]);
+				var cds = music[i].genre;
+				console.log(cds);
+				if (cds == element) {
+					console.log('ho trovato');
+					var source = $("#entry-template").html();
+			    var template = Handlebars.compile(source);
+			    var html = template(music[i]);
+			    $('.cds-container').append(html);
+				}
+			}
+		}
+	});
 });
 
 function printResponse(album) {
   for (var i = 0; i < album.length; i++) {
     var cd = album[i];
     // console.log(cd);
-
-    var source = $("#entry-template").html();
+    var source = $('#entry-template').html();
     // console.log(source);
     var template = Handlebars.compile(source);
-
     var html = template(cd);
     // console.log(html);
     $('.cds-container').append(html);
