@@ -37,21 +37,29 @@ $('select').change(function() {
 		'success': function(data) {
 			var music = data.response;
 			$(".cds-container").empty();
-			for (var i = 0; i < music.length; i++) {
-				// console.log(music[i]);
-				var cds = music[i].genre;
-				console.log(cds);
-				if (cds == element) {
-					console.log('ho trovato');
-					var source = $("#entry-template").html();
-			    var template = Handlebars.compile(source);
-			    var html = template(music[i]);
-			    $('.cds-container').append(html);
-				}
-			}
+			choice(music);
 		}
 	});
 });
+
+// *****************FUNZIONI***************************
+
+
+function choice(album){
+	var element = $('select').val();
+	for (var i = 0; i < album.length; i++) {
+		// console.log(music[i]);
+		var cds = album[i].genre;
+		console.log(cds);
+		if (cds == element) {
+			// console.log('ho trovato');
+			var source = $("#entry-template").html();
+			var template = Handlebars.compile(source);
+			var html = template(album[i]);
+			$('.cds-container').append(html);
+		}
+	}
+}
 
 function printResponse(album) {
   for (var i = 0; i < album.length; i++) {
